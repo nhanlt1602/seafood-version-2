@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "seafood-version-2", "seafood-version-2.csproj", "{4869023A-EC15-4C9B-897B-1F754EF8632B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4869023A-EC15-4C9B-897B-1F754EF8632B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4869023A-EC15-4C9B-897B-1F754EF8632B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4869023A-EC15-4C9B-897B-1F754EF8632B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4869023A-EC15-4C9B-897B-1F754EF8632B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {76812F51-2E0C-4A35-865A-2720AEF077CA}
+	EndGlobalSection
+EndGlobal
