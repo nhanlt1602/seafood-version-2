@@ -1,0 +1,35 @@
+﻿@model seafood_version_2.Models.Category
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Category</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProTypeId" />
+            <div class="form-group">
+                <label asp-for="ProTypeName" class="control-label"></label>
+                <input asp-for="ProTypeName" class="form-control" />
+                <span asp-validation-for="ProTypeName" class="text-danger"></span>
+            </div>
+            @ViewBag.Msg
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

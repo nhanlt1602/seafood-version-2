@@ -4,21 +4,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using seafood_version_2.Models;
 
 namespace seafood_version_2.Controllers
 {
     public class CategoryController : Controller
     {
+        SeafoodContext context = new SeafoodContext();
+
         // GET: CategoryController
         public ActionResult Index()
         {
-            return View();
+            return View(context.Categories.ToList());
         }
 
         // GET: CategoryController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(context.Categories.Where(s => s.ProTypeId == id).FirstOrDefault());
         }
 
         // GET: CategoryController/Create
@@ -30,14 +33,20 @@ namespace seafood_version_2.Controllers
         // POST: CategoryController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(string ProTypeName)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                Category category = new Category();
+                category.ProTypeName = ProTypeName;
+                context.Categories.Add(category);
+                context.SaveChanges();
+                ViewBag.Msg = "Create Success!!!";
+                return View();
             }
             catch
             {
+                ViewBag.Msg = "Create Fail!!!";
                 return View();
             }
         }
@@ -45,20 +54,27 @@ namespace seafood_version_2.Controllers
         // GET: CategoryController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(context.Categories.Where(s => s.ProTypeId == id).FirstOrDefault());
         }
 
         // POST: CategoryController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(string ProTypeId, string ProTypeName)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                Category category = new Category();
+                category.ProTypeId = int.Parse(ProTypeId);
+                category.ProTypeName = ProTypeName;
+                context.Entry(category).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                context.SaveChanges();
+                ViewBag.Msg = "Update Success!!!";
+                return View();
             }
             catch
             {
+                ViewBag.Msg = "Update Fail!!!";
                 return View();
             }
         }
@@ -66,7 +82,7 @@ namespace seafood_version_2.Controllers
         // GET: CategoryController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(context.Categories.Where(s => s.ProTypeId == id).FirstOrDefault());
         }
 
         // POST: CategoryController/Delete/5
@@ -76,10 +92,16 @@ namespace seafood_version_2.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                Category category = new Category();
+                category = context.Categories.Where(s => s.ProTypeId == id).FirstOrDefault();
+                context.Categories.Remove(category);
+                context.SaveChanges();
+                ViewBag.Msg = "Delete Success!!!";
+                return View();
             }
             catch
             {
+                ViewBag.Msg = "Delete Fail!!!";
                 return View();
             }
         }
