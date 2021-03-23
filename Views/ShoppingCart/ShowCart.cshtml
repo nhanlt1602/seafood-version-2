@@ -1,0 +1,88 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model seafood_version_2.Models.Cart
+@{
+    ViewData["Title"] = "ShowCart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ShowToCart</h1>
+@if (Model != null)
+{
+    double total = 0;
+    int stt = 1;
+
+<table class="table">
+    <tr>
+        <th>STT</th>
+        <th>Product Name</th>
+        <th>Image</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Sum</th>
+        <th></th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            var thanhtien = item.shopping_quantity * item.shopping_product.ProPrice;
+            total += thanhtien;
+            <tr>
+                <td>@(stt++)</td>
+                <td>
+                    @Html.DisplayFor(model => item.shopping_product.ProName)
+                </td>
+                <td>
+                    <img src="@Url.Content(item.shopping_product.ImgUrl)" style="width:150px;height:100px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.shopping_product.ProPrice)
+                </td>
+                <td>
+                    <form asp-controller="ShoppingCart" asp-action="UpdateProduct" method="post">
+                        <input type="hidden" value="@item.shopping_product.ProId" name="ID_Product" />
+                        <input type="number" value="@item.shopping_quantity" name="Quantity" />
+                        <input class="btn btn-success" type="submit" value="Update" />
+                    </form>
+
+                </td>
+                <td>
+                    Total:@thanhtien
+                </td>
+                <td>
+                    <a asp-route="removecart" asp-route-ProId="@item.shopping_product.ProId" class="btn btn-danger">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td colspan="3"></td>
+            <td colspan="3">
+                <table style="border-collapse:separate;border-spacing:5px;">
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <input type="submit" value="Checkout" class="btn btn-success" />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td>Total:@total</td>
+        </tr>
+    </tfoot>
+
+</table>
+    <a asp-controller="Product" asp-action="ListProducts" style="margin-left:1450px">Back</a>
+}

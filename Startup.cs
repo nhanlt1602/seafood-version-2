@@ -24,6 +24,11 @@ namespace seafood_version_2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDistributedMemoryCache();
+            services.AddSession(cfg => {
+                //cfg.Cookie.Name = "tu";
+                cfg.IdleTimeout = new TimeSpan(0, 30, 0);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,12 +50,12 @@ namespace seafood_version_2
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Product}/{action=ListProducts}/{id?}");
             });
         }
     }
