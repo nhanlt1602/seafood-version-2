@@ -28,8 +28,7 @@ namespace seafood_version_2.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=SE140057-LONGNH;Initial Catalog=Seafood;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=SE140992;Initial Catalog=Seafood;Integrated Security=True");
             }
         }
 
@@ -40,7 +39,7 @@ namespace seafood_version_2.Models
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.HasKey(e => e.ProTypeId)
-                    .HasName("PK__Category__56F52A472ED66F8A");
+                    .HasName("PK__Category__56F52A47DE2AEF03");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -55,7 +54,7 @@ namespace seafood_version_2.Models
             modelBuilder.Entity<OrderDetail>(entity =>
             {
                 entity.HasKey(e => e.OrderItemId)
-                    .HasName("PK__OrderDet__3724BD52984F15E8");
+                    .HasName("PK__OrderDet__3724BD520A90443E");
 
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetails)
@@ -73,7 +72,7 @@ namespace seafood_version_2.Models
             modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(e => e.ProId)
-                    .HasName("PK__Product__5BBBEEF5D69C35A7");
+                    .HasName("PK__Product__5BBBEEF506744F23");
 
                 entity.Property(e => e.ImgUrl).IsUnicode(false);
 

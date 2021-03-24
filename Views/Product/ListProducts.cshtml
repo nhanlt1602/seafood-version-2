@@ -1,0 +1,53 @@
+﻿@model IEnumerable<seafood_version_2.Models.Product>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@{
+    ViewData["Title"] = "ListProducts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <style>
+        .card {
+            width: 250px;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            box-shadow: 0 4px 8px 0 gray;
+            transition: 0.3s;
+        }
+
+            .card:hover {
+                box-shadow: 0 8px 16px 0;
+            }
+
+        #margin-card {
+            text-align: center;
+        }
+    </style>
+</head>
+<h1>Món ăn</h1>
+<div class="container">
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-sm-6 col-md-4 col-lg-3" id="margin-card">
+                <div class="card">
+                    @Html.DisplayFor(model => product.ProName)
+                    @Html.DisplayFor(model => product.ProId)
+                    <img src="@Url.Content(product.ImgUrl)" style="height:200px;width:200px;margin:10px;border-radius:5px" />
+                    Price: @Html.DisplayFor(model => product.ProPrice)
+                    <a asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-id="@product.ProId" class="btn btn-secondary btn-sm float-right"><img src="@Url.Content("~/image/shopping_cart.png")" style="width:30px;height:20px;margin-left:5px" /></a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+
+
+
